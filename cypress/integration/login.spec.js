@@ -1,5 +1,5 @@
-describe('My First Test', function() {
-  it('login', function() {
+describe('Login Suite ::', function() {
+  it('Failed Login ::', function() {
     cy.server();
     cy.route({ method: 'POST', url: 'http://api.rtracey.dev.rockloans.com/v1/login' }).as('postLogin');
 
@@ -16,11 +16,8 @@ describe('My First Test', function() {
       .click()
 
       cy.wait('@postLogin')     
-      .then((xhr) => {
-        assert.isNotNull(xhr.response.body.data, '1st API call has data')
-        console.log(xhr)
-        console.dir(xhr)
-        assert(xhr.response.statusCode, 401)
+      .then(xhr => {
+        assert.equal(xhr.status, 401)
       })
   })
 })
